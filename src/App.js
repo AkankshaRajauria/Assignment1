@@ -8,7 +8,7 @@ import Home from "./components/Home";
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="fonts">
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/cart" component={Cart}/>

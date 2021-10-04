@@ -8,7 +8,7 @@ const Products = () => {
   return (
     <div>
       <div className="row p-2" style={{ backgroundColor: "lightgray" }}>
-         <Item cardData={cardData} />;
+         {/* <Item cardData={cardData} />; */}
       </div> 
     </div>
   );

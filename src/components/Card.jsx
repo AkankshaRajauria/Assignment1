@@ -1,21 +1,23 @@
 import React, {useState} from "react";
-import { Card, Button, Row, Col, CardGroup } from "react-bootstrap";
+import { Card, Button, Row, Col, CardGroup, Toast } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import {addToCart} from '../actions/index';
-// import { connect } from "react-redux";
-import "./style.css";
+import { ToastContainer, toast } from 'react-toastify';
+import Skeleton from 'react-loading-skeleton';
+import 'react-toastify/dist/ReactToastify.css';
+import "../App.css";
 
 export const Items = ({ cardData }) => { 
   const [inputData, setInputData] = useState("");
   const dispatch = useDispatch();
+  const notify = () => {
+    toast.success("Item Added to the Cart",{position: "top-center", theme: "colored"})
+  };
+  
 
-  // useEffect(() => {
-  //   if(itemToBeSearch) setProductsToBeDisplayed(cardData.filter((e) => e.name.toLowerCase().includes(itemToBeSearch.toLowerCase())));
-  //   else setProductsToBeDisplayed(products);
-  // }, [itemToBeSearch, products])
   return (
     <>
-    <Row style={{ backgroundColor: "lightgray" }}>
+    <Row style={{ backgroundColor: "#c2c2c2" }}>
       {cardData.map((element) => {
         return (
           <>
@@ -24,22 +26,22 @@ export const Items = ({ cardData }) => {
                 <Card.Img
                   variant="top"
                   className="heightClass"
-                  src={element.image}
+                  src={element.product_image}
                   style={{ width: "100%", height: "18vw" }}
                 />
                 <Card.Body>
-                  <Card.Title>{element.name}</Card.Title>
-                  <Card.Text>{element.description}</Card.Text>
+                  <Card.Title className="heading-font">{element.name}</Card.Title>
+                  <Card.Text className="text-capitalize">{element.description}</Card.Text>
                   <Card.Text>Price : ₹ {element.price}</Card.Text>
                   <div className="d-flex justify-content-between">
-                    <Button variant="warning" onClick={() => dispatch(addToCart(element), setInputData(''))}>
-                      <i class="fas fa-shopping-cart"></i> Add
+                    <Button variant="warning" onClick={() => {notify(); dispatch(addToCart(element), setInputData(''))}}>
+                      <i className="fas fa-shopping-cart"></i> Add
                     </Button>
                     <Button
                       variant="warning"
                       style={{ color: "white", backgroundColor: "#ff6a00" }}
                     >
-                      <i class="fas fa-shopping-bag"></i> Buy
+                      <i className="fas fa-shopping-bag"></i> Buy
                     </Button>
                   </div>
                 </Card.Body>
@@ -49,6 +51,7 @@ export const Items = ({ cardData }) => {
         );
       })}
     </Row>
+    <ToastContainer type="success"/>
     </>
   );
 };

@@ -1,4 +1,17 @@
-
+.fonts
+{
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+h5
+{
+  font-weight: bolder!important;
+}
+.heading-font
+{
+  font-weight: bolder!important;
+  color: #282c34;
+}
 .App {
   text-align: center;
 }

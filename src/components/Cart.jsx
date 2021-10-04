@@ -2,9 +2,10 @@ import React, {useState, useEffect} from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useSelector, useDispatch} from "react-redux";
 import {decrement, increment, removeFromCart} from '../actions/index';
-// import { addToCart , adjustQty} from "../actions/index";
 import Header from "./Header";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = ({cart, product}) => {
   const [inputData, setInputData] = useState("");
@@ -14,10 +15,15 @@ const Cart = ({cart, product}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [input, setInput] = useState(product.quantity);
+  const notify = () => {
+    toast.success("Item Removed from the Cart",{position: "top-center", theme: "colored"})
+  };
+  
 
   const onChangeHandler = (e) => {
     console.log(e.target.value);
   }
+
   // const incrementHandler= (e) => {
   //   console.log(e.target.value);
   // }
@@ -47,13 +53,13 @@ const Cart = ({cart, product}) => {
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems])
 
   return (
-    <div>
+    <>
       <Header />
       <Container className="mt-5">
         <Row>
           <Col sm={7}>
             <Card>
-              <h4 className="text-center p-2">My Cart ({totalItems})</h4>
+              <h4 className="text-center p-2 heading-font">My Cart ({totalItems})</h4>
               {list.map((element) => {
                 return (
                   <Row className="p-3">
@@ -61,26 +67,31 @@ const Cart = ({cart, product}) => {
                       <Card>
                         <Card.Img
                           variant="top"
-                          src={element.id.image}
+                          src={element.id.product_image}
                           style={{ height: "150px" }}
                         />
                       </Card>
                     </Col>
                     <Col>
-                      <h4>{element.id.name}</h4>
+                      <h4 className="heading-font">{element.id.name}</h4>
                       <p>Price: ₹ {element.id.price} </p>
                     </Col>
 
                     <Col>
                       
                       <div className="d-flex">
-                        <i className="fas fa-minus" style={{padding: "8px"}} onClick={()=> dispatch(decrement(element.id), setInput(''))}></i>
-                        <input type="text" placeholder={element.quantity} style={{ width: "40px" }}/>
-                        <i className="fas fa-plus" style={{padding: "8px"}} onClick={()=> dispatch(increment(element.id), setInput(''))}></i>
+                        <Button disabled={element.quantity > 1 ? '' : 'disabled'} variant="secondary" size="sm" onClick={()=> dispatch(decrement(element.id), setInput(''))}>
+                          <i className="fas fa-minus"></i>
+                          </Button>
+                        <input type="text" placeholder={element.quantity} style={{ width: "40px", marginLeft: "5px",marginRight: "5px" }}/>
+                        <Button variant="secondary" size="sm" onClick={()=> dispatch(increment(element.id), setInput(''))}>                        
+                          <i className="fas fa-plus"></i>
+                        </Button>
+
                       </div>
                       
-                      <Button variant="danger" className="mt-3"  onClick={() => dispatch(removeFromCart(element.id),
-                        setInputData(''))}>
+                      <Button variant="danger" className="mt-3" onClick={() => {dispatch(removeFromCart(element.id),
+                        setInputData('')); notify()}}>
                         Delete
                       </Button>
                     </Col>
@@ -92,11 +103,11 @@ const Cart = ({cart, product}) => {
           <Col sm={1}></Col>
           <Col sm={4}>
             <Card>
-            <h4 className="text-center p-2">Price Detail</h4>
+            <h4 className="text-center p-2 heading-font">Price Detail</h4>
              {list.map((element) => {
                return (
                 <Card.Header className="d-flex justify-content-between">
-                  <h6>{element.id.name} x {element.quantity}</h6>
+                  <h6 className="heading-font">{element.id.name} x {element.quantity}</h6>
                   <p>₹ {element.id.price * element.quantity}</p>
                 </Card.Header>
                )
@@ -107,7 +118,8 @@ const Cart = ({cart, product}) => {
           </Col>
         </Row>
       </Container>
-    </div>
+      <ToastContainer/>
+    </>
   );
 };
 

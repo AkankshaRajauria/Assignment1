@@ -1,29 +1,61 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { Row, Col } from "react-bootstrap";
 import Items from './Card'
-import CardData from './CardData'
+// import CardData from './CardData'
 import Carousels from './Carousels'
 import Header from './Header'
 import Products from './Products'
+import axios from 'axios'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import CardSkeleton from './Skeleton/CardSkeleton'
+
 
 const Home = () => {
-    const [Search, setSearch] = useState('');
-    const [Result, setResult] = useState(CardData);
-    const [cardData, setcardData] = useState(CardData);
+    // const [Search, setSearch] = useState('');
+    const [cardData, setCardData] = useState([]);
+    const [Result, setResult] = useState(cardData);
+    const [isloading, setIsloading] = useState(true);
 
 
-    //here we filter the list where the title(or any element of data) is equal to input value
+    useEffect(() => {
+        setTimeout(() => {
+          axios.get("https://615a89444a360f0017a810f1.mockapi.io/Product")
+          .then(res => {
+              setCardData(res.data)
+              setIsloading(false) 
+          })
+        }, 1000)
+    }, [])
+
+
     const searchChange = (e) => {
-        // alert("Hey")
      const searchResult = cardData.filter((element) => element.name.toLowerCase().includes(e.target.value))
- 
-       //here we set the filtered list to result
-         setResult(searchResult);
+          setResult(searchResult);
        };
     return (
         <div>
+           { console.log("data of api", cardData, Result) }
             <Header onChange={searchChange} />
             <Carousels/>
-            <Items cardData={Result!==null?Result:cardData}/>
+            <SkeletonTheme>
+                {
+                    isloading
+                    ?
+                    <>
+                    <Row>
+                    <Col lg={3} md={2} className="p-3 m-3 d-flex justify-content-between">
+
+                        <CardSkeleton/><CardSkeleton/><CardSkeleton/><CardSkeleton/>
+                    </Col>
+                    </Row>
+                    </>
+                    :                    
+                    <Items cardData={cardData}/>
+
+                }
+            </SkeletonTheme>
+            {/* <Items cardData={Result!==null?Result:cardData}/> */}
+
         </div>
     )
 }
