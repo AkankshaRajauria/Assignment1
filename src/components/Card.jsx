@@ -10,9 +10,9 @@ import Multiselect from 'multiselect-react-dropdown';
 import CardData from "./CardData";
 
 
-export const Items = ({ cardData, wishlist }) => { 
+export const Items = ({ cardData, wishlist, cart }) => { 
   // const [cardData, setCardData] = useState(Data);
-
+  console.log("cart",cart);
   const [inputData, setInputData] = useState("");
   const [wishlistData, setWishlistData] = useState();
   const [result, setResult] = useState(cardData);
@@ -81,10 +81,10 @@ export const Items = ({ cardData, wishlist }) => {
     console.log("remove", data);
     setResult(cardData);
   }
+  // const str = result !== null ? result : cardData;
 
     return (
     <>
-    
       <div className="d-flex align-items-center pt-4 pb-2" style={{ backgroundColor: "#c2c2c2" }}>
         <Col lg={2} className="justify-content-end">
         <h6 className="text-center heading-font">Filter By Price</h6>
@@ -159,6 +159,7 @@ export const Items = ({ cardData, wishlist }) => {
 const mapStateToProp = state => {
   return {
     wishlist: state.shop.wishlist,
+    cart: state.shop.cart
   }
 }
 

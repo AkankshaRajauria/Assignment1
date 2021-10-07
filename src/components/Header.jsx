@@ -14,6 +14,7 @@ import {addToCart} from '../actions/index';
 import store from "../store";
 import { connect } from "react-redux";
 import "../App.css";
+import { Items } from "./Card";
 
 
 const Header = ({cart, onChange}) => {
@@ -25,10 +26,11 @@ const Header = ({cart, onChange}) => {
   useEffect(() => {
     let count = 0;
     cart.forEach((item) => {
+      console.log("item",item);
       count += item.id.quantity;
     });
     setCartCount(count);
-  }, [cart, cartCount])
+  }, [cart])
 
   return (
     <div>
