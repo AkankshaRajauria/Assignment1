@@ -10,8 +10,8 @@ function Carousels() {
   };
   return (
     <div>
-      <Carousel activeIndex={index} onSelect={handleSelect} className="p-1" style={{backgroundColor: "lightgray"}}>
-        <Carousel.Item style={{height:"400px"}}>
+      <Carousel activeIndex={index} onSelect={handleSelect} className="p-1 bannerclass" style={{backgroundColor: "#c2c2c2"}}>
+        <Carousel.Item className="bannerclass">
           <img
             className="d-block w-100"
             src="/images/shoes3.jpg"
@@ -22,30 +22,30 @@ function Carousels() {
             {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item style={{height:"400px"}}>
+        <Carousel.Item className="bannerclass">
           <img
             className="d-block w-100"
             src="/images/slider7.jpg"
             alt="Second slide"
           />
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <Carousel.Caption className="mobile-caption">
+            {/* <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item style={{height:"400px"}}>
+        <Carousel.Item className="bannerclass">
           <img
             className="d-block w-100"
             src="/images/shoes2.png"
             alt="Third slide"
           />
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
+          <Carousel.Caption className="mobile-caption">
+            {/* <h3>Third slide label</h3>
             <p>
               Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            </p> */}
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

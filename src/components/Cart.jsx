@@ -18,24 +18,7 @@ const Cart = ({cart, product}) => {
   const notify = () => {
     toast.success("Item Removed from the Cart",{position: "top-center", theme: "colored"})
   };
-  
 
-  const onChangeHandler = (e) => {
-    console.log(e.target.value);
-  }
-
-  // const incrementHandler= (e) => {
-  //   console.log(e.target.value);
-  // }
-  // const [quantity, setQuantity] = useState(0);
-
-  // useEffect(() => {
-  //   let quantity = 0;
-  //   cart.forEach((item) => {
-  //     quantity += item.id.quantity;
-  //   });
-  //   setQuantity(quantity);
-  // }, [cart, quantity])
 
   useEffect(() => {
     let items = 0;
@@ -55,11 +38,14 @@ const Cart = ({cart, product}) => {
   return (
     <>
       <Header />
-      <Container className="mt-5">
+      <Container className="mt-5 pt-5 pb-5" style={{backgroundColor: "#c2c2c2", borderRadius: "10px"}}>
         <Row>
-          <Col sm={7}>
+          <Col sm={8}>
+            <Card className="mb-3">
+            <h4 className="text-center p-2 heading-font">My Cart ({totalItems})</h4>
+
+            </Card>
             <Card>
-              <h4 className="text-center p-2 heading-font">My Cart ({totalItems})</h4>
               {list.map((element) => {
                 return (
                   <Row className="p-3">
@@ -100,7 +86,6 @@ const Cart = ({cart, product}) => {
               })}
             </Card>
           </Col>
-          <Col sm={1}></Col>
           <Col sm={4}>
             <Card>
             <h4 className="text-center p-2 heading-font">Price Detail</h4>

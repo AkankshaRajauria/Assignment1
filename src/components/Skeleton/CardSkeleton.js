@@ -1,6 +1,6 @@
 import React from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { Card, Row, Col, Button, Container } from "react-bootstrap";
+import Skeleton from "react-loading-skeleton";
+import { Card } from "react-bootstrap";
 
 const CardSkeleton = () => {
   return (

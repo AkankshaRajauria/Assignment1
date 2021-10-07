@@ -12,6 +12,88 @@ h5
   font-weight: bolder!important;
   color: #282c34;
 }
+.card-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.heightClass {
+  width: 100%;
+  height: 18vw;
+  
+  /* @media (max-width: 400px) {
+      text-align: left;
+  } */
+}
+.bannerclass
+{
+  height: 400px;
+}
+.card
+{
+  border-radius: 10px!important;
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+@media (max-width: 991px) {
+  .heightClass
+  {
+    height: auto!important;
+  }
+  .bannerclass
+  {
+    height: 100%;
+  }
+  .mobile-caption
+  {
+    display: none;
+  }
+  .paginationBtn li a 
+  {
+    padding: 8px!important;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    background-color: white;
+    color: rgb(75 40 109);
+    margin-left: 3px!important;
+    margin-right: 3px!important;
+    box-shadow: 0 14px 28px rgb(182 182 182), 0 10px 10px rgb(154 154 154);
+
+  }
+  .previousBtn
+  {
+    background-color: rgb(75 40 109);
+    padding: 8px;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    color: white;
+    text-decoration: none;
+    margin-right: 0px;
+  }
+  .nextBtn
+  {
+    background-color: rgb(75 40 109);
+    padding: 9px;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    color: white;
+    text-decoration: none;
+    margin-left: 0px;
+
+  }
+  .positionCounter
+  {
+    position: static!important;
+  }
+  .p-sm
+  {
+    margin-left: 20px;
+  }
+  .searchspace
+  {
+    margin: 10px;
+  }
+}
 .App {
   text-align: center;
 }
@@ -49,4 +131,80 @@ h5
   to {
     transform: rotate(360deg);
   }
+}
+.paginationBtn
+{
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  justify-content: center;
+  display: flex;
+}
+.paginationActive a
+{
+  background-color: rgb(75 40 109)!important;
+  color: white!important;
+}
+.previousBtn
+{
+  background-color: rgb(75 40 109);
+  padding: 9px;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+.nextBtn
+{
+  background-color: rgb(75 40 109);
+  padding: 9px;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+.paginationBtn li a
+{
+  /* border: 2px solid rgb(193 193 193); */
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  background-color: white;
+  color: rgb(75 40 109);
+  margin-left: 5px;
+  margin-right: 5px;
+  box-shadow: 0 14px 28px rgb(182 182 182), 0 10px 10px rgb(154 154 154);
+}
+
+.paginationBtn li a:hover {
+  background-color: rgb(75 40 109);
+  color: white!important;
+}
+
+.positionCounter
+{
+  position: absolute;
+  top: 3px;
+}
+/* .accordion .accordion-button
+{
+  /* background-color:"#4b286d"!important;
+  color: white; 
+/* }  */
+.violet
+{
+  color: #4b286d;
+}
+.b-10
+{
+  border-radius: 10px;
+}
+@media (max-width: 991px)
+{
+
 }

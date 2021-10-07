@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {addToCart} from '../actions/index';
 import store from "../store";
 import { connect } from "react-redux";
+import "../App.css";
 
 
 const Header = ({cart, onChange}) => {
@@ -37,7 +38,7 @@ const Header = ({cart, onChange}) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="justify-content-between">
-          <Form className="d-flex">
+          <Form className="d-flex searchspace">
             <FormControl
               type="text"
               placeholder="Search"
@@ -53,15 +54,21 @@ const Header = ({cart, onChange}) => {
             </Button>
           </Form>
           <Nav
-            className="mr-auto my-2 my-lg-0 d-flex"
+            className="mr-auto my-2 my-lg-0 d-flex p-sm"
             navbarScroll
             style={{ paddingRight: "20px", color: "white", maxHeight: "100px"  }}
           >
-            <NavDropdown title="Akanksha" id="navbarScrollingDropdown">
-              <NavDropdown.Item>My Profile</NavDropdown.Item>
+            <NavDropdown title={
+              <><span>Akanksha </span><i class="fas fa-user"></i></>
+            }  id="navbarScrollingDropdown">
+              <NavDropdown.Item>
+                <Link to="/order"  className="heading-font" style={{textDecoration: "none", color: "#4b286d"}}>My Orders</Link>
+              </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#" disabled>
-              <i className="fas fa-heart" style={{ color: "#c2c2c2" }}></i>
+            <Nav.Link>
+              <Link to="/wishlist">
+                <i className="fas fa-heart" style={{ color: "#c2c2c2" }}></i>
+              </Link>
             </Nav.Link>
             <Nav.Link>
               <Link to="/cart">
@@ -73,8 +80,7 @@ const Header = ({cart, onChange}) => {
                   pill
                   bg="light"
                   text="dark"
-                  className="pb-2"
-                  style={{ position: "absolute", top: "3px" }}
+                  className="pb-2 positionCounter"
                 >
                   {cartCount}
                 </Badge>

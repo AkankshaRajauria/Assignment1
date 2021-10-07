@@ -35,3 +35,14 @@ export const decrement = (itemID) => {
         }
     }
 }
+
+export const addToWishlist = (itemID) => {
+    return {
+        type : "ADD_TO_WISHLIST",
+        payload: {
+            data: itemID,
+            color : "red"
+            // qty: value
+        }
+    }
+}

@@ -5,8 +5,8 @@ const INITIAL_STATE = {
   cart: [],
   currentItem: null,
   totalItem: 0,
-  itemToBeSearch: ""
-
+  itemToBeSearch: "",
+  wishlist : []
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -54,11 +54,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ),
 
       }
-    // case "SEARCH_ITEMS" :
-    //   return {
-    //     ...state,
-    //     products: state.itemToBeSearch = action.payload.id;
-    //   }
+
+      case "ADD_TO_WISHLIST" :
+        const {data, color} = action.payload;
+        return {
+          ...state,
+          wishlist: [
+            ...state.wishlist,
+            {
+                data: data,
+                color: "red"
+            }
+        ]
+
+      }
       
     default:
       return state;
