@@ -59,7 +59,7 @@ const Header = ({cart, onChange}) => {
             style={{ paddingRight: "20px", color: "white", maxHeight: "100px"  }}
           >
             <NavDropdown title={
-              <><span>Akanksha </span><i class="fas fa-user"></i></>
+              <><span>Akanksha </span><i className="fas fa-user"></i></>
             }  id="navbarScrollingDropdown">
               <NavDropdown.Item>
                 <Link to="/order"  className="heading-font" style={{textDecoration: "none", color: "#4b286d"}}>My Orders</Link>

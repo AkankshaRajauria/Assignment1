@@ -13,7 +13,6 @@ import CardData from "./CardData";
 export const Items = ({ cardData, wishlist }) => { 
   // const [cardData, setCardData] = useState(Data);
 
-
   const [inputData, setInputData] = useState("");
   const [wishlistData, setWishlistData] = useState();
   const [result, setResult] = useState(cardData);
@@ -118,7 +117,7 @@ export const Items = ({ cardData, wishlist }) => {
                   <Card.Text className="text-capitalize">{element.description}</Card.Text>
                   <Card.Text className="d-flex justify-content-between">
                     <div>Price : ₹ {element.price}</div>
-                    <i class="fas fa-heart" id="wishlisted" style= {{color: (element.style.color)}} onClick={()=> {notifyWishlist(); wishlisted(element); dispatch(addToWishlist(element), setWishlistData(''))}}></i>
+                    <i className="fas fa-heart" id="wishlisted" style= {{color: (element.style.color)}} onClick={()=> {notifyWishlist(); wishlisted(element); dispatch(addToWishlist(element), setWishlistData(''))}}></i>
                   </Card.Text>
                   <div className="d-flex justify-content-between">
                     <Button variant="warning" onClick={() => {notify(); dispatch(addToCart(element), setInputData(''))}}>

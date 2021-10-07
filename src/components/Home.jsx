@@ -36,7 +36,7 @@ const Home = () => {
        };
     return (
         <div>
-           { console.log("data of api", cardData, result) }
+           {/* { console.log("data of api", cardData, result) } */}
             <Header onChange={searchChange} />
             <SkeletonTheme>
                 {
