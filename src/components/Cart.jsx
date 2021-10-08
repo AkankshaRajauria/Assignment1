@@ -11,10 +11,11 @@ const Cart = ({ cart, product }) => {
   const [inputData, setInputData] = useState("");
   const dispatch = useDispatch();
   const list = useSelector((state) => state.shop.cart);
-  console.log("list", list);
+  // console.log("list", list);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [input, setInput] = useState(product.quantity);
+  const [cartItems,setCartItems]=useState(list);
   const notify = () => {
     toast.success("Item Removed from the Cart", {
       position: "top-center",
@@ -22,14 +23,45 @@ const Cart = ({ cart, product }) => {
     });
   };
 
+useEffect(() => {
+  var temp=[]
+ 
+    for(var i=0;i<cartItems.length;i++){
+        for(let j=0;j<temp.length;j++)
+        {
+          var flag=true;
+          if(temp[j].id.id==cartItems[i].id.id)
+          {
+            temp[j].quantity++;
+            flag=false;
+          
+          }
+          
+         
+        }
+       
+        if(flag)
+        temp.push(cartItems[i]);
+  }
+  console.log("temp",temp);
+ 
+}, [cart])
+
   useEffect(() => {
     let items = 0;
     let price = 0;
 
+    
+
+ 
+
+
+          
+            
     cart.forEach((item) => {
       items += item.id.quantity;
       price += item.quantity * item.id.price;
-      console.log("price", items, item.id.price);
+      //console.log("price", items, item.id.price);
     });
     setTotalItems(items);
     setTotalPrice(price);

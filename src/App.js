@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Wishlist from './components/Wishlist';
 import Order from './components/Order';
+import ProductDescription from "./components/ProductDescription";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/cart" component={Cart}/>
           <Route exact path="/wishlist" component={Wishlist}/>
           <Route exact path="/order" component={Order}/>
+          <Route exact path="/product/:id" component={ProductDescription}/>
         </Switch>
       </div>
     </BrowserRouter>

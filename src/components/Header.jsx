@@ -25,11 +25,30 @@ const Header = ({cart, onChange}) => {
 
   useEffect(() => {
     let count = 0;
-    cart.forEach((item) => {
-      console.log("item",item);
-      count += item.id.quantity;
-    });
-    setCartCount(count);
+    let temp=[];
+    for(let i=0;i<cart.length;i++)
+    {
+      if(temp.length==0)
+      {
+        temp.push(cart[i]);
+      }
+      else{
+     // var flag=false;
+           for(let j=0;j<temp.length;j++)
+           {
+             if(temp[j].id.id==cart[i].id.id)
+                continue;
+                else
+                temp.push(cart[i]);
+
+           }
+      }
+    }
+    // cart.forEach((item) => {
+    //   console.log("item",item);
+    //   count += item.id.quantity;
+    // });
+    setCartCount(temp.length);
   }, [cart])
 
   return (

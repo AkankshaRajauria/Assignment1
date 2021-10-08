@@ -8,7 +8,7 @@ import "../App.css";
 import ReactPaginate from "react-paginate";
 import Multiselect from 'multiselect-react-dropdown';
 import CardData from "./CardData";
-
+import { Link } from "react-router-dom";
 
 export const Items = ({ cardData, wishlist, cart }) => { 
   // const [cardData, setCardData] = useState(Data);
@@ -40,7 +40,6 @@ export const Items = ({ cardData, wishlist, cart }) => {
   const pageCount = Math.ceil(cardData.length/itemsPerPage);
   const handlePageClick = ({selected}) => {
     setPageNumber(selected);
-    // console.log("selected",selected);
   };
 
   const data = [
@@ -62,7 +61,6 @@ export const Items = ({ cardData, wishlist, cart }) => {
         case 'Under ₹50':
           const searchResult = result.filter((element) => element.price > 0 && element.price < 51)
           setResult(searchResult);
-          console.log("entered ?");
             // this.setState({ nation: val });
             break;
         case '₹51 - ₹90':
@@ -105,6 +103,7 @@ export const Items = ({ cardData, wishlist, cart }) => {
         return (
           <>
             <Col lg={3} md={6} className="p-3">
+              {/* <Link to={`/product/${element.id}`}> */}
               <Card className="card-4" key={element.id}>
                 <Card.Img
                   variant="top"
@@ -132,6 +131,7 @@ export const Items = ({ cardData, wishlist, cart }) => {
                   </div>
                 </Card.Body>
               </Card>
+              {/* </Link> */}
             </Col>
           </>
         );
