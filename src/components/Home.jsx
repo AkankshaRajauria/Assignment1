@@ -1,43 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Row, Card } from "react-bootstrap";
 import Items from "./Card";
-// import CardData from './CardData'
 import Carousels from "./Carousels";
 import Header from "./Header";
-import Products from "./Products";
-import axios from "axios";
+import Footer from './Footer'
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import CardSkeleton from "./Skeleton/CardSkeleton";
 import CarouselSkeleton from "./Skeleton/CarouselSkeleton";
+import { getProducts } from "../actions";
+import { connect, useDispatch } from "react-redux";
+import ApiData from "./Api/ApiData";
 
-const Home = () => {
-  // const [Search, setSearch] = useState('');
-  const [cardData, setCardData] = useState([]);
-  const [result, setResult] = useState(cardData);
-  const [isloading, setIsloading] = useState(true);
+const Home = ({ isLoading, pagfilter, products }) => {
+  const [result, setResult] = useState([]);
+  const [isloading, setIsloading] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get("https://615a89444a360f0017a810f1.mockapi.io/Product")
-        .then((res) => {
-          setCardData(res.data);
-          setResult(res.data);
-          setIsloading(false);
-        });
-    }, 2000);
-  }, []);
+    setIsloading(isLoading);
+    setResult(products);
+  }, [products]);
 
-  const searchChange = (e) => {
-    const searchResult = cardData.filter((element) =>
-      element.name.toLowerCase().includes(e.target.value)
-    );
-    setResult(searchResult);
-  };
+  useEffect(() => {
+    dispatch(getProducts(pagfilter));
+    ApiData.get("/Cart").then((res) => {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: res.data,
+      });
+    });
+  }, [dispatch]);
+
+  
+
   return (
-    <div>
-      {/* { console.log("data of api", cardData, result) } */}
-      <Header onChange={searchChange} />
+    <>
+      <Header/>
       <SkeletonTheme>
         {isloading ? (
           <>
@@ -49,17 +47,17 @@ const Home = () => {
         ) : (
           <>
             <Carousels />
-            {result.length !== 0 ? (
+            {products.length !== 0 ? (
               <>
-                <Items cardData={result !== null ? result : cardData} />
+                <Items cardData={result} pagfilter={pagfilter} />
+                <Footer/>
               </>
             ) : (
               <>
                 <Card className="pt-5 pb-5 text-center">
                   <div>
                     <img
-                      src="../images/no-data.png"
-                      style={{ width: "250px", height: "250px" }}
+                      src="../images/no-data.png" className="size"
                     />
                   </div>
                 </Card>
@@ -68,8 +66,16 @@ const Home = () => {
           </>
         )}
       </SkeletonTheme>
-    </div>
+    </>
   );
 };
 
-export default Home;
+const mapStateToProp = (state) => {
+  return {
+    products: state.shop.filteredArr,
+    isLoading: state.shop.saved,
+    pagfilter: state.shop.pagfilter,
+  };
+};
+
+export default connect(mapStateToProp)(Home);

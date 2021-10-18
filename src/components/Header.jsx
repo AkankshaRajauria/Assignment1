@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ReactBootstrap, {
   Navbar,
   Nav,
@@ -9,115 +9,98 @@ import ReactBootstrap, {
   Badge,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import {addToCart} from '../actions/index';
-import store from "../store";
+import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import "../App.css";
-import { Items } from "./Card";
+import { search } from "../actions/index";
 
+const Header = ({ cart, pagfilter }) => {
+  const [input, setInput] = useState("");
 
-const Header = ({cart, onChange}) => {
-
-  const [cartCount, setCartCount] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  const dispatch = useDispatch();
+  const searchFunc = (e) => {
+    e.preventDefault();
+    dispatch(search(input, pagfilter));
+  };
 
   useEffect(() => {
-    let count = 0;
-    let temp=[];
-    for(let i=0;i<cart.length;i++)
-    {
-      if(temp.length==0)
-      {
-        temp.push(cart[i]);
-      }
-      else{
-     // var flag=false;
-           for(let j=0;j<temp.length;j++)
-           {
-             if(temp[j].id.id==cart[i].id.id)
-                continue;
-                else
-                temp.push(cart[i]);
+    dispatch(search(input, pagfilter));
+  }, [input]);
 
-           }
-      }
-    }
-    // cart.forEach((item) => {
-    //   console.log("item",item);
-    //   count += item.id.quantity;
-    // });
-    setCartCount(temp.length);
-  }, [cart])
+  const dispatch = useDispatch();
 
   return (
-    <div>
-      <Navbar expand="lg" variant="dark" style={{backgroundColor:"#4b286d"}}>
+    <>
+      <Navbar expand="lg" variant="dark" className="dark-blue-bg">
         <Navbar.Brand className="mx-3">
-        <Link to="/" style={{textDecoration: "none", color:"white"}}> E-Cart</Link>
+          <Link to="/"> E-Cart</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="justify-content-between">
-          <Form className="d-flex searchspace">
+          <Form className="d-flex searchspace" onSubmit={searchFunc}>
             <FormControl
               type="text"
               placeholder="Search"
               className="mr-2"
               aria-label="Search"
-              onChange={onChange}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+              value={input}
             />
-            <Button
-              variant="outline-secondary"
-              style={{ backgroundColor: "#c2c2c2" }}
-            >
-              <i className="fas fa-search fa-x" style={{ color: "white" }}></i>
+            <Button variant="outline-secondary" className="bg-purple">
+              <i className="fas fa-search fa-x text-white"></i>
             </Button>
           </Form>
           <Nav
-            className="mr-auto my-2 my-lg-0 d-flex p-sm"
+            className="mr-auto my-2 my-lg-0 d-flex p-sm nav-style"
             navbarScroll
-            style={{ paddingRight: "20px", color: "white", maxHeight: "100px"  }}
           >
-            <NavDropdown title={
-              <><span>Akanksha </span><i className="fas fa-user"></i></>
-            }  id="navbarScrollingDropdown">
+            <NavDropdown
+              title={
+                <>
+                  <span>AR </span>
+                </>
+              }
+              id="navbarScrollingDropdown"
+              className="user-avatar"
+            >
               <NavDropdown.Item>
-                <Link to="/order"  className="heading-font" style={{textDecoration: "none", color: "#4b286d"}}>My Orders</Link>
+                <Link to="/order" className="heading-font">
+                  My Orders
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to="/charts" className="heading-font">
+                  Analytics
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link>
-              <Link to="/wishlist">
-                <i className="fas fa-heart" style={{ color: "#c2c2c2" }}></i>
-              </Link>
+            <Nav.Link as={Link} to="/wishlist">
+              <i className="fas fa-heart purple-font"></i>
             </Nav.Link>
-            <Nav.Link>
-              <Link to="/cart">
-                <i
-                  className="fas fa-shopping-cart"
-                  style={{ color: "#c2c2c2", position: "relative" }}
-                ></i>
-                <Badge
-                  pill
-                  bg="light"
-                  text="dark"
-                  className="pb-2 positionCounter"
-                >
-                  {cartCount}
-                </Badge>
-              </Link>
+            <Nav.Link as={Link} to="/cart">
+              <i className="fas fa-shopping-cart purple-font position-relative"></i>
+              <Badge
+                pill
+                bg="light"
+                text="dark"
+                className="pb-2 positionCounter"
+              >
+                {cart.length}
+              </Badge>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </div>
+    </>
   );
-}
+};
 
-const mapStateToProp = state => {
+const mapStateToProp = (state) => {
   return {
-    cart: state.shop.cart
-  }
-}
+    cart: state.shop.cart,
+    pagfilter: state.shop.pagfilter,
+  };
+};
 
 export default connect(mapStateToProp)(Header);

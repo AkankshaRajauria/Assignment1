@@ -3,27 +3,20 @@ import Header from "./Header";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { connect } from "react-redux";
 import "../App.css";
+import Footer from "./Footer";
 
 const Wishlist = ({ wishlist }) => {
-  // const list = useSelector((state) => state.shop.wishlist);
-  // console.log("list", );
-  // const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
-    let items = 0;
     const wishlistItems = wishlist.length;
     setTotalItems(wishlistItems);
   }, [wishlist, totalItems, setTotalItems]);
-  console.log("wishlist", wishlist);
 
   return (
     <>
       <Header />
-      <Container
-        className="pt-5 pb-5 mt-3"
-        style={{ backgroundColor: "#c2c2c2", borderRadius: "10px" }}
-      >
+      <Container className="pt-5 pb-5 mt-3 container-bg mb-3">
         <Row>
           <Col sm={12} lg={{ span: 8, offset: 2 }}>
             <Card className="mb-3">
@@ -37,18 +30,22 @@ const Wishlist = ({ wishlist }) => {
                   {wishlist.map((element) => {
                     return (
                       <Row className="p-3">
-                        <Col>
-                          <Card key={element.data.id}>
-                            <Card.Img
+                        <Col lg={5}>
+                          <div key={element.data.id}>
+                            <img
                               variant="top"
                               src={element.data.product_image}
-                              style={{ height: "150px" }}
+                              className="heightImage"
                             />
-                          </Card>
+                          </div>
                         </Col>
-                        <Col>
-                          <h4 className="heading-font">{element.data.name}</h4>
-                          <p>Price: ₹ {element.data.price} </p>
+                        <Col lg={{ span: 6 }}>
+                          <h4 className="heading-font mobile-center">
+                            {element.data.name}
+                          </h4>
+                          <p className="mobile-center">
+                            Price: ₹ {element.data.price}{" "}
+                          </p>
                         </Col>
                       </Row>
                     );
@@ -62,7 +59,7 @@ const Wishlist = ({ wishlist }) => {
                   <div>
                     <img
                       src="../images/wishlist.png"
-                      style={{ width: "200px", height: "200px" }}
+                      className="no-wishlist"
                     />
                   </div>
                 </Card>
@@ -71,7 +68,7 @@ const Wishlist = ({ wishlist }) => {
           </Col>
         </Row>
       </Container>
-      {/* <ToastContainer/> */}
+      <Footer />
     </>
   );
 };

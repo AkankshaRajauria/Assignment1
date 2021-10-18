@@ -16,3 +16,47 @@
 
     }
   }
+  .card-height
+  {
+    height: "150px";
+  }
+  .cart-img
+  {
+    width: "200px";
+    height: "150px";
+  }
+  .input-style
+  {
+    width: "40px"!important;
+    margin-left: "5px"!important;
+    margin-right: "5px"!important;
+  }
+  .container-bg
+  {
+    background-color: "#c2c2c2"!important;
+    border-radius: "10px";
+  }
+.b-10
+{
+  border-radius: 10px;
+}
+.card-height
+{
+  height: "150px";
+}
+.cart-img
+{
+  width: "200px";
+  height: "150px";
+}
+.input-style
+{
+  width: "40px"!important;
+  margin-left: "5px"!important;
+  margin-right: "5px"!important;
+}
+.btn-style
+{
+  color: "white"; 
+  background-color: "#ff6a00";
+}

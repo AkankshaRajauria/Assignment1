@@ -1,26 +1,38 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button, Accordion, Card, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Accordion,
+  Card,
+  Form,
+} from "react-bootstrap";
 import Header from "./Header";
 import "../App.css";
 import OrderData from "./OrderData";
 import DateRangePicker from "react-bootstrap-daterangepicker";
-import 'bootstrap-daterangepicker/daterangepicker.css';
-
-
+import "bootstrap-daterangepicker/daterangepicker.css";
+import Footer from "./Footer";
 
 const Order = () => {
   const [orderData, setOrderData] = useState(OrderData);
 
   const handleCallback = (start, end) => {
-    setOrderData((data) => data.filter((orderData) => orderData.date > new Date(start).toISOString() && orderData.date < new Date(end).toISOString()))
-  }
+    setOrderData((data) =>
+      data.filter(
+        (orderData) =>
+          orderData.date > new Date(start).toISOString() &&
+          orderData.date < new Date(end).toISOString()
+      )
+    );
+  };
 
   return (
     <>
       <Header />
       <Container
-        className="pt-5 pb-5 mt-3"
-        style={{ backgroundColor: "#c2c2c2", borderRadius: "10px" }}
+        className="pt-5 pb-5 mt-3 container-bg mb-3"
       >
         <Row>
           <Col sm={12} lg={{ span: 8, offset: 2 }}>
@@ -29,42 +41,67 @@ const Order = () => {
             </Card>
 
             <div className="d-flex justify-content-end mb-3">
-            <div>
-                <DateRangePicker initialSettings={{ startDate: new Date('2020'), endDate: new Date() }} onCallback={handleCallback}>
-                    <Form.Control type="text" />
+              <div>
+                <DateRangePicker
+                  initialSettings={{
+                    startDate: new Date("2020"),
+                    endDate: new Date(),
+                  }}
+                  onCallback={handleCallback}
+                >
+                  <Form.Control type="text" />
                 </DateRangePicker>
+              </div>
             </div>
-        </div>
-            {orderData.map((elem) => {
-              return (
-                <>  
-                <Accordion defaultActiveKey={1}>
-                  <Accordion.Item eventKey={elem.id} key={elem.id}>
-                    <Accordion.Header
-                      className="heading-font"
-                      style={{ backgroundColor: "#4b286d" }}
-                    >
-                      {elem.name}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        <Row>
-                        <Col lg={4}>
-                            <img src={elem.image} style={{width: "200px", height: "13vw"}}/>
-                        </Col>
-                        <Col lg={8} style={{display: "flex",alignItems: "center", justifyContent: "center"}}>
-                            <h3 >{elem.description}</h3>
-                        </Col>
-
-                      </Row>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
-                </>
-              );
-            })}
+            {orderData.length != 0 ? (
+              <>
+                {orderData.map((elem) => {
+                  return (
+                    <>
+                      <Accordion defaultActiveKey={1}>
+                        <Accordion.Item eventKey={elem.id} key={elem.id}>
+                          <Accordion.Header
+                            className="heading-font dark-blue-bg"
+                          >
+                            {elem.name}
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Row>
+                              <Col lg={4}>
+                                <img
+                                  src={elem.image} className="order-img"
+                                />
+                              </Col>
+                              <Col
+                                lg={8}
+                                className="center-align"
+                              >
+                                <h3 className="heading-font">{elem.description}</h3>
+                              </Col>
+                            </Row>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                <Card className="pt-5 pb-5 text-center">
+                  <div>
+                    <img
+                      src="../images/no_order.png"
+                      className="no-order"
+                    />
+                  </div>
+                </Card>
+              </>
+            )}
           </Col>
         </Row>
       </Container>
+      <Footer/>
     </>
   );
 };

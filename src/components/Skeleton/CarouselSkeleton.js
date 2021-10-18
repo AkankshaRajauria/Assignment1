@@ -1,14 +1,18 @@
 import React from 'react'
 import Skeleton from "react-loading-skeleton";
-import { Carousel} from "react-bootstrap";
+import { Carousel, Row, Col} from "react-bootstrap";
 
 
 const CarouselSkeleton = () => {
     return (
         <div>
-            <Carousel>
-                <Carousel.Item><Skeleton height={400} width={2000} /></Carousel.Item>
-            </Carousel>
+            <Row>
+               <Col lg={12}> 
+                <Carousel>
+                    <Carousel.Item><Skeleton height={400} /></Carousel.Item>
+                </Carousel>
+               </Col>
+            </Row>
         </div>
     )
 }
