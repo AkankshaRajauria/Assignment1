@@ -3,8 +3,8 @@ import { Row, Card } from "react-bootstrap";
 import Items from "./Card";
 import Carousels from "./Carousels";
 import Header from "./Header";
-import Footer from './Footer'
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Footer from "./Footer";
+import { SkeletonTheme } from "react-loading-skeleton";
 import CardSkeleton from "./Skeleton/CardSkeleton";
 import CarouselSkeleton from "./Skeleton/CarouselSkeleton";
 import { getProducts } from "../actions";
@@ -31,11 +31,9 @@ const Home = ({ isLoading, pagfilter, products }) => {
     });
   }, [dispatch]);
 
-  
-
   return (
     <>
-      <Header/>
+      <Header />
       <SkeletonTheme>
         {isloading ? (
           <>
@@ -50,15 +48,13 @@ const Home = ({ isLoading, pagfilter, products }) => {
             {products.length !== 0 ? (
               <>
                 <Items cardData={result} pagfilter={pagfilter} />
-                <Footer/>
+                <Footer />
               </>
             ) : (
               <>
                 <Card className="pt-5 pb-5 text-center">
                   <div>
-                    <img
-                      src="../images/no-data.png" className="size"
-                    />
+                    <img src="../images/no-data.png" className="size" />
                   </div>
                 </Card>
               </>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
-// import slider1 from '../../public/images/slider1.jpg'
+import "../App.css"
 
 function Carousels() {
   const [index, setIndex] = useState(0);
@@ -18,22 +18,22 @@ function Carousels() {
       >
         <Carousel.Item className="bannerclass">
           <img
-            className="d-block w-100"
-            src="/images/shoes3.jpg"
+            className="d-block w-100 height-banner mobile-height"
+            src="/images/laptop-banner4.jpg"
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item className="bannerclass">
           <img
-            className="d-block w-100"
-            src="/images/slider7.jpg"
+            className="d-block w-100 mobile-height"
+            src="/images/shoes3.jpg"
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item className="bannerclass">
           <img
-            className="d-block w-100"
-            src="/images/shoes2.png"
+            className="d-block w-100 height-banner mobile-height"
+            src="/images/laptop-banner5.jpg"
             alt="Third slide"
           />
         </Carousel.Item>

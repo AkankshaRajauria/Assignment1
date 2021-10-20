@@ -24,7 +24,7 @@ const Wishlist = ({ wishlist }) => {
                 My WishList ({totalItems})
               </h2>
             </Card>
-            {wishlist.length != 0 ? (
+            {wishlist.length !== 0 ? (
               <>
                 <Card>
                   {wishlist.map((element) => {

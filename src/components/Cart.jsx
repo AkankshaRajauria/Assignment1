@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   decrement,
@@ -9,7 +9,7 @@ import {
 } from "../actions/index";
 import Header from "./Header";
 import { connect } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirm } from "react-confirm-box";
 import ApiData from "./Api/ApiData";
@@ -85,7 +85,7 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                     </h4>
                   </Card>
                   <Card className="mb-3">
-                    {list.length != 0 ? (
+                    {list.length !== 0 ? (
                       <>
                         {list.map((element) => {
                           return (
@@ -135,8 +135,9 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                                 </div>
 
                                 <Button
-                                  variant="danger"
-                                  className="mt-3"
+                                  // variant="danger"
+
+                                  className="mt-3 blue-btn"
                                   onClick={() => {
                                     ConfirmBox(element.id);
                                   }}

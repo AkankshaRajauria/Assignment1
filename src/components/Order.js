@@ -53,7 +53,7 @@ const Order = () => {
                 </DateRangePicker>
               </div>
             </div>
-            {orderData.length != 0 ? (
+            {orderData.length !== 0 ? (
               <>
                 {orderData.map((elem) => {
                   return (

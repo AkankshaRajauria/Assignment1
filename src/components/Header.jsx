@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactBootstrap, {
+import {
   Navbar,
   Nav,
   NavDropdown,
@@ -72,6 +72,11 @@ const Header = ({ cart, pagfilter }) => {
               <NavDropdown.Item>
                 <Link to="/charts" className="heading-font">
                   Analytics
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to="/login" className="heading-font">
+                  Logout
                 </Link>
               </NavDropdown.Item>
             </NavDropdown>

@@ -63,7 +63,7 @@ export const Items = ({
     setPageNumber(selected + 1);
     pagfilter.page = selected + 1;
 
-    if (searchedInput != "") {
+    if (searchedInput !== "") {
       dispatch(search(searchedInput, pagfilter));
     } else {
       if (pageData < 3) {
@@ -128,7 +128,7 @@ export const Items = ({
 
   return (
     <>
-      <div className="d-flex align-items-center pt-4 pb-2 bg-purple">
+      <div className="d-flex align-items-center pt-4 pb-2 p-2 bg-purple">
         <Col lg={2} className="justify-content-end p-2">
           <h6 className="text-center heading-font">Filter By Category</h6>
         </Col>
@@ -179,12 +179,12 @@ export const Items = ({
                   </Card.Text>
                   <div className="d-flex justify-content-between">
                     <Button
-                      variant="warning"
+                      className="dark-blue-bg blue-btn"
                       onClick={() => addCartHandler(element)}
                     >
                       <i className="fas fa-shopping-cart"></i> Add
                     </Button>
-                    <Button variant="warning" className="buy-button">
+                    <Button className="buy-button">
                       <i className="fas fa-shopping-bag"></i> Buy
                     </Button>
                   </div>

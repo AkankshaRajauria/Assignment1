@@ -8,6 +8,8 @@ import Wishlist from '../components/Wishlist';
 import Order from '../components/Order';
 import ProductDescription from "../components/ProductDescription";
 import Charts from "../components/Charts";
+import Login from "../components/Login";
+import SignUp from "../components/SignUp";
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route exact path="/order" component={Order}/>
           <Route exact path="/product/:id" component={ProductDescription}/>
           <Route exact path="/charts" component={Charts}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/register" component={SignUp}/>
         </Switch>
       </div>
     </BrowserRouter>

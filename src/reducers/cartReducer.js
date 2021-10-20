@@ -7,6 +7,8 @@ const INITIAL_STATE = {
   allProducts: [],
   totProducts: [],
   searchedInput: "",
+  user: null,
+  loggedIn: false,
   pagfilter: {
     page: 1,
     limit: 8,
@@ -127,6 +129,12 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           allProducts: categoryData,
         };
       }
+
+    case "LOGIN":
+     return {
+       user: action.payload,
+
+     }   
 
     default:
       return state;

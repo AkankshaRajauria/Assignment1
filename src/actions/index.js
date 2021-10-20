@@ -102,3 +102,14 @@ export const removeFilter = (data, pagNo) => async dispatch =>  {
         data: totalRes.data
     })  
 } 
+
+export const login = (data) => async dispatch =>  {
+    // const res = await ApiData.get(`/Product?page=${pagNo.page}&limit=${pagNo.limit}&category=${data}`);
+    // const totalRes = await ApiData.get(`/Product?category=${data}`);
+
+    return dispatch({
+        type:"LOGIN",
+        payload:data,
+        // data: totalRes.data
+    })  
+} 

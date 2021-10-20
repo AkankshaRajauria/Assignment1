@@ -1,7 +1,13 @@
-.fonts
+@font-face {
+  font-family: "Telus-Web-Reg";
+  src: url("./resources/fonts/Telus-Web-Reg.ttf");
+}
+
+body
 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
+  /* font-family: 'Roboto', sans-serif; */
+  /* font-weight: bold; */
+  font-family: "Telus-Web-Reg"!important;
 }
 h5
 {
@@ -12,7 +18,7 @@ a { color: inherit!important;
 } 
 .heading-font
 {
-  font-weight: bolder!important;
+  /* font-weight: bolder!important; */
   color: #282c34;
 }
 .card-4 {
@@ -247,8 +253,20 @@ a { color: inherit; }
 }
 .buy-button
 {
-  color: white!important;
-  background-color: #ff6a00!important;
+  border-width: 0px!important;
+  border-radius: 4px!important;
+  font-size: 1rem!important;
+  letter-spacing: -0.8px!important;
+  line-height: 1.5!important;
+  overflow-wrap: break-word!important;
+  font-weight: 700;
+  font-family: TELUS-Web, "Helvetica Neue", Helvetica, Arial, sans-serif!important;
+  margin: 0px!important;
+  padding: 0px 2rem!important;
+  cursor: pointer!important;
+  background: none rgb(43, 128, 0)!important;
+  padding-top: 9px!important;
+  padding-bottom: 9px!important;
 }
 .product-img
 {
@@ -257,7 +275,7 @@ a { color: inherit; }
 }
 .dark-blue-bg
 {
-  background-color: #4b286d; 
+  background-color: #4b286d!important; 
 }
 .icon-style
 {
@@ -291,6 +309,7 @@ a { color: inherit; }
 .nav-style
 {
   padding-right: 20px; 
+  margin-right: 15px;
   color: white; 
   max-height: 100px
 }
@@ -342,7 +361,32 @@ a { color: inherit; }
     height: auto!important;
     width: 100%!important;
   }
+  .mobile-height
+  {
+    height: 470px!important;
+  }
 
+}
+@media(max-width: 767px)
+{
+  .mobile-height
+  {
+    height: 420px!important;
+  }
+}
+@media(max-width: 575px)
+{
+  .mobile-height
+  {
+    height: 300px!important;
+  }
+}
+@media(max-width: 480px)
+{
+  .mobile-height
+  {
+    height: 215px!important;
+  }
 }
 .purple-font
 {
@@ -384,4 +428,53 @@ a { color: inherit; }
 }
 .no-order {
   width: 600px; height: 500px;
+}
+.blue-btn
+{
+  border-width: 0px!important;
+    border-radius: 4px!important;
+    font-size: 1rem!important;
+    letter-spacing: 0.2px!important;
+    line-height: 1.5!important;
+    overflow-wrap: break-word!important;
+    font-weight: 700;
+    font-family: "Telus-Web-Reg", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0px!important;
+    padding: 0px 2rem!important;
+    cursor: pointer!important;
+    background: none rgb(75, 40, 109)!important;
+    padding-top: 9px!important;
+    padding-bottom: 9px!important;
+}
+.btn-space
+{
+  padding-left: 60px!important;
+  padding-right: 60px!important;
+}
+.f600
+{
+  font-weight: 600;
+}
+.spacing {
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+.input-style{
+  border: 1px solid #54595f!important;
+    border-radius: 5px!important;
+    background-color: #ffffff!important;
+    height: 3rem!important;
+    padding: 0 1rem!important;
+}
+.form-check-input:checked {
+  background-color: #2b8000!important;
+}
+sup{
+  color: #c12335;
+    font-size: 18px;
+    top: 0;
+}
+.height-banner
+{
+  height: 100%;
 }
