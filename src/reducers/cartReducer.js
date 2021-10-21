@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   allProducts: [],
   totProducts: [],
   searchedInput: "",
-  user: null,
+  users: [],
   loggedIn: false,
   pagfilter: {
     page: 1,
@@ -55,13 +55,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
     case "ADD_TO_WISHLIST":
       const { data, color } = action.payload;
+      console.log("wishlist data", data.style)
+      const red = "red";
+      data.style = red;
       return {
         ...state,
         wishlist: [
           ...state.wishlist,
           {
             data: data,
-            color: color,
           },
         ],
       };
@@ -131,10 +133,46 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       }
 
     case "LOGIN":
-     return {
-       user: action.payload,
+      let IsLoggedIn = false;
+      let name = "";
+      let registerFields = action.payload;
+      let credentials = action.data;
+      console.log("registerField", registerFields);
 
+      for(let i= 0; i < registerFields.length; i++)
+      {
+        if(registerFields[i].email === credentials.email && registerFields[i].password === credentials.password)
+        {
+          IsLoggedIn = true;
+        }            
+      }
+      return {
+        ...state,
+        loggedIn: IsLoggedIn,
+      };
+
+    case "LOGOUT":
+      return {
+        ...state,
+        loggedIn: false,
+      }   
+      
+    
+     case "REGISTER":
+     return {
+      ...state,
+      users: [...state.users, action.payload],
      }   
+
+     case "REMOVE_FROM_WISHLIST": 
+
+      return {
+       ...state,
+       wishlist: state.wishlist.filter((element) => {
+         console.log("element.id", element, action.payload);
+         return element.data.id !== action.payload.id;
+       }),
+      }    
 
     default:
       return state;

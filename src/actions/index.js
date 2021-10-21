@@ -104,12 +104,37 @@ export const removeFilter = (data, pagNo) => async dispatch =>  {
 } 
 
 export const login = (data) => async dispatch =>  {
-    // const res = await ApiData.get(`/Product?page=${pagNo.page}&limit=${pagNo.limit}&category=${data}`);
-    // const totalRes = await ApiData.get(`/Product?category=${data}`);
-
+    const res = await ApiData.get(`/Users`);
+    console.log("login", res.data);
+    
     return dispatch({
         type:"LOGIN",
-        payload:data,
-        // data: totalRes.data
+        payload:res.data,
+        data: data
     })  
+} 
+export const logout = (data) => {
+    
+    return {
+        type:"LOGOUT",
+    }  
+} 
+
+export const register = (data) => async dispatch =>  {
+    await ApiData.post('/Users', data);
+    const userRes =  await ApiData.get('/Users');
+
+    return dispatch({
+        type:"REGISTER",
+        payload:userRes.data,
+    })  
+} 
+
+export const removeFromWishlist = (data) =>  {
+    console.log("wishlist", data);
+
+    return {
+        type:"REMOVE_FROM_WISHLIST",
+        payload:data,
+    } 
 } 

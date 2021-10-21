@@ -11,11 +11,11 @@ import Header from "./Header";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { confirm } from "react-confirm-box";
 import ApiData from "./Api/ApiData";
 import { SkeletonTheme } from "react-loading-skeleton";
 import CartSkeleton from "./Skeleton/CartSkeleton";
 import Footer from "./Footer";
+import Swal from "sweetalert2";
 
 const Cart = ({ cart, product, pagfilter, isLoading }) => {
   const dispatch = useDispatch();
@@ -53,19 +53,26 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
     setTotalPrice(price);
   }, [cart]);
 
-  const options = {
-    labels: {
-      confirmable: "Confirm",
-      cancellable: "Cancel",
-    },
-  };
 
   const ConfirmBox = async (res) => {
-    const result = await confirm("Are you sure?", options);
-    if (result) {
-      dispatch(removeFromCart(res));
-      return;
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result) {
+          dispatch(removeFromCart(res));
+          return;
+        }
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+
   };
 
   return (
@@ -121,7 +128,7 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                                   <input
                                     type="text"
                                     placeholder={element.quantity}
-                                    className="input-style"
+                                    className="input-style-1"
                                   />
                                   <Button
                                     variant="secondary"

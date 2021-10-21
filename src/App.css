@@ -2,7 +2,10 @@
   font-family: "Telus-Web-Reg";
   src: url("./resources/fonts/Telus-Web-Reg.ttf");
 }
-
+*:focus {
+  outline: 0 !important;
+  border: none!important;
+}
 body
 {
   /* font-family: 'Roboto', sans-serif; */
@@ -215,11 +218,21 @@ a { color: inherit; }
   width: 200px;
   height: 150px;
 }
-.input-style
+.input-style-1
 {
   width: 40px;
   margin-left: 5px;
   margin-right: 5px;
+}
+.swal2-confirm
+{
+  background-color: #4b286d!important;
+
+}
+.swal2-cancel
+{
+  background: none rgb(43, 128, 0)!important;
+
 }
 .container-bg
 {
@@ -267,6 +280,19 @@ a { color: inherit; }
   background: none rgb(43, 128, 0)!important;
   padding-top: 9px!important;
   padding-bottom: 9px!important;
+}
+.buy-button:active
+{
+    outline: none!important;
+    border: none!important;
+}
+.buy-button::focus
+{
+  outline: none!important;
+ 
+}
+button{
+  outline: none!important;
 }
 .product-img
 {
@@ -477,4 +503,23 @@ sup{
 .height-banner
 {
   height: 100%;
+}
+.text-blue
+{
+  color: blue!important;
+}
+/* @media screen(max-width:1199px) and (min-width: 992px) */
+@media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+  .blue-btn
+  {
+    padding: 0px 1.2rem!important;
+    height: 35px;
+
+  }
+  .buy-button
+  {
+    padding: 0px 1.2rem!important;
+    height: 35px;
+  }
+
 }

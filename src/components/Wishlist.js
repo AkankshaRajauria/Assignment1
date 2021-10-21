@@ -1,12 +1,36 @@
-import React, { useEffect, useState, useSelector } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { connect } from "react-redux";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { connect, useDispatch } from "react-redux";
 import "../App.css";
 import Footer from "./Footer";
+import Swal from "sweetalert2";
+import { removeFromWishlist } from "../actions";
+
 
 const Wishlist = ({ wishlist }) => {
+  const dispatch = useDispatch();
   const [totalItems, setTotalItems] = useState(0);
+
+  const ConfirmBox = async (res) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result) {
+          dispatch(removeFromWishlist(res));
+          return;
+        }
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
 
   useEffect(() => {
     const wishlistItems = wishlist.length;
@@ -46,6 +70,14 @@ const Wishlist = ({ wishlist }) => {
                           <p className="mobile-center">
                             Price: ₹ {element.data.price}{" "}
                           </p>
+                          <Button
+                            className="mt-3 blue-btn"
+                            onClick={() => {
+                              ConfirmBox(element.data);
+                            }}
+                          >
+                          Delete
+                          </Button>
                         </Col>
                       </Row>
                     );

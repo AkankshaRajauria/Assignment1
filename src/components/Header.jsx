@@ -12,15 +12,21 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import "../App.css";
-import { search } from "../actions/index";
+import { logout, search } from "../actions/index";
 
-const Header = ({ cart, pagfilter }) => {
+const Header = ({ cart, pagfilter , loggedIn}) => {
+  console.log("loggedIn Out", loggedIn);
   const [input, setInput] = useState("");
 
   const searchFunc = (e) => {
     e.preventDefault();
     dispatch(search(input, pagfilter));
   };
+  const loggedOut = () => {
+    dispatch(logout());
+
+    // e.preventDefault();
+  }
 
   useEffect(() => {
     dispatch(search(input, pagfilter));
@@ -74,7 +80,7 @@ const Header = ({ cart, pagfilter }) => {
                   Analytics
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item>
+              <NavDropdown.Item onClick={loggedOut}>
                 <Link to="/login" className="heading-font">
                   Logout
                 </Link>
@@ -105,6 +111,7 @@ const mapStateToProp = (state) => {
   return {
     cart: state.shop.cart,
     pagfilter: state.shop.pagfilter,
+    loggedIn: state.shop.loggedIn
   };
 };
 

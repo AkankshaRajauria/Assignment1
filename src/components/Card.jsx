@@ -30,10 +30,11 @@ export const Items = ({
   const [wishStyle, setWishStyle] = useState("grey");
   const [filterCat, setFilterCat] = useState([]);
 
-  const wishlisted = (e) => {
-    e.style = { color: "red" };
-    setWishStyle("red");
-  };
+  // const wishlisted = (e) => {
+  //   e.style = { color: "red" };
+  //   setWishStyle("red");
+  // };
+
 
   useEffect(() => {
     setResult(cardData);
@@ -143,10 +144,10 @@ export const Items = ({
           </div>
         </Col>
       </div>
-      <Row className="bg-purple">
+      <Row className="bg-purple p-3">
         {cardData.map((element) => {
           return (
-            <Col lg={3} md={6} className="p-3" key={element.id}>
+            <Col lg={3} md={6} className="mt-4" key={element.id}>
               <Card className="card-4">
                 <Link to={`/product/${element.id}`}>
                   <Card.Img
@@ -169,10 +170,9 @@ export const Items = ({
                     <i
                       className="fas fa-heart"
                       id="wishlisted"
-                      style={{ color: element.style.color }}
+                      style={{ color: element.style }}
                       onClick={() => {
                         notifyWishlist();
-                        wishlisted(element);
                         dispatch(addToWishlist(element));
                       }}
                     ></i>
