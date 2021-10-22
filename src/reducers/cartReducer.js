@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   allProducts: [],
   totProducts: [],
   searchedInput: "",
+  user :[],
   users: [],
   loggedIn: false,
   pagfilter: {

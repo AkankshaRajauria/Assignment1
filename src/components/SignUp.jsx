@@ -1,42 +1,48 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { register } from "../actions";
 import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Validation from "./Validation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
 
     const dispatch = useDispatch()
-    const [userNameError, setUserNameError] = useState("");
-    const [emailError, setemailError] = useState("");
-    const [passwordError, setPassWordError] = useState("");
+   
     const [credentials, setcredentials] = useState({username: "",email: "",password: ""});
+    const [errors, setErrors] = useState([])
+    const [dataIsCorrect, setdataIsCorrect] = useState(false)
 
     const SignUpHandler = (e) => {
         e.preventDefault();
         setcredentials({...credentials, [e.target.name]: e.target.value});
-        console.log("credentials",credentials);
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if (credentials.username.length < 4) {
-          setUserNameError("Username is too sort");
-          return;
-        }
-        // if (credentials.email.length === 0) {
-        //   setemailError("email cant be blanked");
-        //   return;
-        // }
-        // if (credentials.passwords.length < 6) {
-        //   setPassWordError("password should be greater than 6");
-        //   return;
-        // }
-        dispatch(register(credentials));
-        // setIsRegistred(true);
-        setcredentials({ username: "", email: "", passwords: "" });
-      };
+        setErrors(Validation(credentials))
+        setdataIsCorrect(true);
+        // setcredentials({ username: "", email: "", passwords: "" });
+    };
+
+    useEffect(() => {
+      if(Object.keys(errors).length === 0 && dataIsCorrect === true) {
+         dispatch(register(credentials));
+          toast.success(" Successfully Account Created!", {
+            position: "top-right",
+            theme: "colored",
+          });
+          setdataIsCorrect(false);
+                  setcredentials({ username: "", email: "", password: "" });
+
+      }
+
+                        // setcredentials({ username: "", email: "", password: "" });
+
+    }, [errors])
 
   return (
     <>
@@ -59,9 +65,7 @@ const SignUp = () => {
                     onChange={SignUpHandler}
                     autoComplete="off"
                   />
-                  <span className="text-danger" id="error">
-                    {userNameError}
-                  </span>
+                  {errors.username && <p className="error">{errors.username}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className="f600">
@@ -75,6 +79,7 @@ const SignUp = () => {
                     value={credentials.email}
                     onChange={SignUpHandler}
                   />
+                  {errors.email && <p className="error">{errors.email}</p>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -89,6 +94,8 @@ const SignUp = () => {
                     value={credentials.password}
                     onChange={SignUpHandler}
                   />
+                  {errors.password && <p className="error">{errors.password}</p>}
+
                 </Form.Group>
                 <Button className="buy-button btn-space mt-3" type="submit">
                   Submit
@@ -102,6 +109,7 @@ const SignUp = () => {
         </Row>
       </Container>
       <Footer />
+      <ToastContainer/>
     </>
   );
 };
