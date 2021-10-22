@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { register } from "../actions";
 import Footer from "./Footer";
@@ -9,40 +9,40 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-   
-    const [credentials, setcredentials] = useState({username: "",email: "",password: ""});
-    const [errors, setErrors] = useState([])
-    const [dataIsCorrect, setdataIsCorrect] = useState(false)
+  const [credentials, setcredentials] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState([]);
+  const [dataIsCorrect, setdataIsCorrect] = useState(false);
 
-    const SignUpHandler = (e) => {
-        e.preventDefault();
-        setcredentials({...credentials, [e.target.name]: e.target.value});
+  const SignUpHandler = (e) => {
+    e.preventDefault();
+    setcredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setErrors(Validation(credentials));
+    setdataIsCorrect(true);
+    console.log("length",Object.keys(errors).length);
+
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && dataIsCorrect === true) {
+      dispatch(register(credentials));
+      toast.success(" Successfully Account Created!", {
+        position: "top-right",
+        theme: "colored",
+      });
+      setdataIsCorrect(false);
+      setcredentials({ username: "", email: "", password: "" });
     }
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        setErrors(Validation(credentials))
-        setdataIsCorrect(true);
-        // setcredentials({ username: "", email: "", passwords: "" });
-    };
-
-    useEffect(() => {
-      if(Object.keys(errors).length === 0 && dataIsCorrect === true) {
-         dispatch(register(credentials));
-          toast.success(" Successfully Account Created!", {
-            position: "top-right",
-            theme: "colored",
-          });
-          setdataIsCorrect(false);
-                  setcredentials({ username: "", email: "", password: "" });
-
-      }
-
-                        // setcredentials({ username: "", email: "", password: "" });
-
-    }, [errors])
+  }, [errors]);
 
   return (
     <>
@@ -65,7 +65,9 @@ const SignUp = () => {
                     onChange={SignUpHandler}
                     autoComplete="off"
                   />
-                  {errors.username && <p className="error">{errors.username}</p>}
+                  {errors.username && (
+                    <p className="error">{errors.username}</p>
+                  )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className="f600">
@@ -94,22 +96,27 @@ const SignUp = () => {
                     value={credentials.password}
                     onChange={SignUpHandler}
                   />
-                  {errors.password && <p className="error">{errors.password}</p>}
-
+                  {errors.password && (
+                    <p className="error">{errors.password}</p>
+                  )}
                 </Form.Group>
                 <Button className="buy-button btn-space mt-3" type="submit">
                   Submit
                 </Button>
                 <p className="mt-3">
-              Already registered with us ?<Link to="/login" className="text-blue"> Login</Link>
-          </p>
+                  Already registered with us ?
+                  <Link to="/login" className="text-blue">
+                    {" "}
+                    Login
+                  </Link>
+                </p>
               </Form>
             </div>
           </Col>
         </Row>
       </Container>
       <Footer />
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

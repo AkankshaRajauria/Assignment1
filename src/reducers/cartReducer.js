@@ -55,7 +55,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
 
     case "ADD_TO_WISHLIST":
-      const { data, color } = action.payload;
+      const { data } = action.payload;
       console.log("wishlist data", data.style)
       const red = "red";
       data.style = red;
@@ -135,7 +135,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
     case "LOGIN":
       let IsLoggedIn = false;
-      let name = "";
       let registerFields = action.payload;
       let credentials = action.data;
       console.log("registerField", registerFields);

@@ -72,10 +72,4 @@ const CartSkeleton = () => {
   );
 };
 
-const mapStateToProp = (state) => {
-  return {
-    product: state.shop.cart,
-  };
-};
-
 export default CartSkeleton;
