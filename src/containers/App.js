@@ -12,14 +12,16 @@ import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { connect } from "react-redux";
 
-function App(loggedIn) {
+function App() {
   
-  const isLoggedIn = loggedIn.loggedIn;
+  // const isLoggedIn = loggedIn.loggedIn;
+  const isAuthenticated = localStorage.getItem("loggedIn");
+
   return (
     <BrowserRouter>
       <div className="fonts">
         <Switch>
-          {isLoggedIn === false && (
+          {isAuthenticated === true && (
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>

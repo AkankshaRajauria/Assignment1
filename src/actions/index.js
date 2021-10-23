@@ -130,6 +130,16 @@ export const register = (data) => async dispatch =>  {
     })  
 } 
 
+// export const updateUser = (data) => async dispatch =>  {
+//     await ApiData.post('/Users', data);
+//     const userRes =  await ApiData.get('/Users');
+
+//     return dispatch({
+//         type:"UPDATE_USER",
+//         payload:userRes.data,
+//     })  
+// } 
+
 export const removeFromWishlist = (data) =>  {
     console.log("wishlist", data);
 

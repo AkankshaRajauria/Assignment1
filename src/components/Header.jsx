@@ -23,6 +23,7 @@ const Header = ({ cart, pagfilter , loggedIn}) => {
     dispatch(search(input, pagfilter));
   };
   const loggedOut = () => {
+    localStorage.removeItem("loggedIn")
     dispatch(logout());
 
     // e.preventDefault();

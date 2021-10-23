@@ -172,7 +172,12 @@ const cartReducer = (state = INITIAL_STATE, action) => {
          console.log("element.id", element, action.payload);
          return element.data.id !== action.payload.id;
        }),
-      }    
+      }
+      
+    //  case "UPDATE_USER":
+    //   return {
+
+    //   }  
 
     default:
       return state;

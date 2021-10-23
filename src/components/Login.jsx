@@ -1,18 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import Footer from "./Footer";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { login } from "../actions";
 import {LoginValidation} from "./Validation";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
 
   const loggedIn = useSelector(state => state.shop.loggedIn)
   console.log("loggedIn", loggedIn);
+   
+  useEffect(() => {
 
+      if(loggedIn)
+      {
+        history.push("/");
+        localStorage.setItem("loggedIn", loggedIn);
+      }
+   
+  }, [loggedIn])
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -26,6 +35,7 @@ const Login = () => {
 
   const LoginHandler = (e) => {
     e.preventDefault();
+    
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
@@ -37,30 +47,48 @@ const Login = () => {
     e.preventDefault();
     setErrors(LoginValidation(credentials));
     setdataIsCorrect(true);
-    console.log("errors", errors, credentials);
-    console.log("validation",LoginValidation(credentials));
+
+          console.log(credentials);
+          dispatch(login(credentials)).then(res => {
+                    if (loggedIn) {
+                        history.push("/");
+                    }
+                    else if(!loggedIn)
+                    {
+                       toast.error("Invalid Credentials!", {
+                           position: "top-right",
+                           theme: "colored",
+                       });
+                    }
+                  });
+      
+
+
+
+   // console.log("errors", errors, credentials);
+   // console.log("validation",LoginValidation(credentials));
     // dispatch(login(credentials));
-    if (Object.keys(errors).length === 0 && dataIsCorrect) {
-        console.log("loggedIn", loggedIn.loggedIn);
-         dispatch(login(credentials)).then(res => {
-            if (loggedIn) {
-                history.push("/");
-            }
-            else if(!loggedIn)
-            {
-               toast.error("Invalid Credentials!", {
-                   position: "top-right",
-                   theme: "colored",
-               });
-            }
+    // if (Object.keys(errors).length === 0 && dataIsCorrect) {
+    //     console.log("loggedIn", loggedIn.loggedIn);
+    //      dispatch(login(credentials)).then(res => {
+    //         if (loggedIn) {
+    //             history.push("/");
+    //         }
+    //         else if(!loggedIn)
+    //         {
+    //            toast.error("Invalid Credentials!", {
+    //                position: "top-right",
+    //                theme: "colored",
+    //            });
+    //         }
             
-         })
+    //      })
          
         //   if(!loggedIn)
         //   {
             
         //   }
-    }
+    //}
     // if (loggedIn.loggedIn === true) {
     //   history.push("/");
     // }
