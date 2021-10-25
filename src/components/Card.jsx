@@ -129,10 +129,7 @@ export const Items = ({
 
   return (
     <>
-      <div className="d-flex align-items-center pt-4 pb-2 p-2 bg-purple">
-        <Col lg={2} className="justify-content-end p-2">
-          <h6 className="text-center heading-font">Filter By Category</h6>
-        </Col>
+      <div className="d-flex justify-content-end  pt-4 p-3 bg-purple">
         <Col lg={3}>
           <div className="bg-white b-10">
             <Multiselect
@@ -140,6 +137,7 @@ export const Items = ({
               displayValue="category" // Property name to display in the dropdown options
               onSelect={onSelect} // Function will trigger on select event
               onRemove={onRemove}
+              placeholder="Filter By Category"
             />
           </div>
         </Col>
@@ -147,7 +145,7 @@ export const Items = ({
       <Row className="bg-purple p-3">
         {cardData.map((element) => {
           return (
-            <Col lg={3} md={6} className="mt-4" key={element.id}>
+            <Col lg={3} md={6} className="mb-5" key={element.id}>
               <Card className="card-4">
                 <Link to={`/product/${element.id}`}>
                   <Card.Img

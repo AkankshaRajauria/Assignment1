@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   products: [],
   cart: [],
   saved: true,
+  cartLoading: true,
   wishlist: [],
   filteredArr: [],
   allProducts: [],
@@ -24,6 +25,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cart: id,
+        // cartLoading: false
       };
 
     case "REMOVE_FROM_CART":
@@ -78,6 +80,13 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         allProducts: action.data,
         totProducts: action.data,
       };
+
+    case "GET_CART_ITEMS":
+      return {
+        ...state,
+        cart: action.payload,
+        cartLoading: false        
+      }  
 
     case "SEARCH":
       const filteredArr = action.payload;
@@ -137,8 +146,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       let IsLoggedIn = false;
       let registerFields = action.payload;
       let credentials = action.data;
-      console.log("registerField", registerFields);
-
       for(let i= 0; i < registerFields.length; i++)
       {
         if(registerFields[i].email === credentials.email && registerFields[i].password === credentials.password)
@@ -173,11 +180,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
          return element.data.id !== action.payload.id;
        }),
       }
-      
-    //  case "UPDATE_USER":
-    //   return {
-
-    //   }  
 
     default:
       return state;

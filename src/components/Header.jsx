@@ -37,11 +37,11 @@ const Header = ({ cart, pagfilter , loggedIn}) => {
 
   return (
     <>
-      <Navbar expand="lg" variant="dark" className="dark-blue-bg">
+      <Navbar expand="lg" variant="dark" className="dark-blue-bg fixed-header">
         <Navbar.Brand className="mx-3">
           <Link to="/"> E-Cart</Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScroll" className="space-right"/>
         <Navbar.Collapse id="navbarScroll" className="justify-content-between">
           <Form className="d-flex searchspace" onSubmit={searchFunc}>
             <FormControl

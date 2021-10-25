@@ -53,12 +53,12 @@ const CartSkeleton = () => {
                   <Skeleton />
                 </h6>
                 <h6>
-                  <Skeleton />
+                  <Skeleton height={120} />
                 </h6>
               </Card.Header>
               <Card.Body className="d-flex justify-content-between">
                 <h5>
-                  <Skeleton />
+                  <Skeleton height={35} />
                 </h5>
                 <h5>
                   <Skeleton />

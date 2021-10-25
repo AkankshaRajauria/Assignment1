@@ -59,6 +59,8 @@ export const getProducts = (pagNo) => async dispatch => {
     })
 }
 
+
+
 export const search = (itemID, pagNo) => async dispatch => {
 
     const res = await ApiData.get(`/Product?page=${pagNo.page}&limit=${pagNo.limit}&search=${itemID}`);
@@ -74,10 +76,10 @@ export const search = (itemID, pagNo) => async dispatch => {
 
 export const getCartItems = () => async dispatch =>  {
     const response = await ApiData.get(`/Cart`); 
-    return {
+    return dispatch({
         type:"GET_CART_ITEMS",
         payload:response.data
-    }   
+    }) 
 } 
 
 export const filterData = (data, pagNo) => async dispatch => {
@@ -105,8 +107,7 @@ export const removeFilter = (data, pagNo) => async dispatch =>  {
 
 export const login = (data) => async dispatch =>  {
     const res = await ApiData.get(`/Users`);
-    console.log("login", res.data);
-    
+
     return dispatch({
         type:"LOGIN",
         payload:res.data,
@@ -130,18 +131,7 @@ export const register = (data) => async dispatch =>  {
     })  
 } 
 
-// export const updateUser = (data) => async dispatch =>  {
-//     await ApiData.post('/Users', data);
-//     const userRes =  await ApiData.get('/Users');
-
-//     return dispatch({
-//         type:"UPDATE_USER",
-//         payload:userRes.data,
-//     })  
-// } 
-
 export const removeFromWishlist = (data) =>  {
-    console.log("wishlist", data);
 
     return {
         type:"REMOVE_FROM_WISHLIST",

@@ -212,6 +212,20 @@ a { color: inherit; }
 .card-height
 {
   height: 150px;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+@media(max-width: 767px)
+{
+  .card-height
+  {
+    height: auto;
+    margin-bottom: 25px;
+    border: 2px solid #4b286d;
+    border-radius: 10px;
+    box-shadow: none;
+    width: 100%;
+  }
 }
 .cart-img
 {
@@ -369,10 +383,6 @@ button{
     width: 300px;
     
   }
-  .mobile-center
-  {
-    text-align: center;
-  }
   .dropdown-menu
   {
     background-color: #4b286d!important;
@@ -398,6 +408,10 @@ button{
   .mobile-height
   {
     height: 420px!important;
+  }
+  .mobile-center
+  {
+    text-align: center;
   }
 }
 @media(max-width: 575px)
@@ -529,4 +543,37 @@ sup{
 }
 textarea:focus, input:focus{
   outline: none;
+}
+.fixed-header
+{
+  position: fixed!important;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+.margin-style
+{
+  margin-top: 55px;
+}
+.space-right
+{
+  margin-right: 25px;
+}
+.page-margin {
+  margin-top: 80px!important;
+}
+.p-style
+{
+  padding: 10px;
+}
+@media(max-width: 575px)
+{
+  .width-box
+  {
+    width: 250px;
+  }
+}
+.mb-auto
+{
+  margin-bottom: 2rem!important;
 }

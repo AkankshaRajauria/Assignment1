@@ -8,7 +8,7 @@ const Charts = () => {
   return (
     <>
       <Header />
-      <Container className="pt-5 pb-5 mt-3 container-bg mb-3">
+      <Container className="pt-5 pb-5 page-margin container-bg mb-3">
         <Row className="mb-5">
           <Col sm={12} lg={{ span: 6, offset: 3 }}>
             <Card className="mb-3">

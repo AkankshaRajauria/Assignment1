@@ -40,7 +40,7 @@ const Wishlist = ({ wishlist }) => {
   return (
     <>
       <Header />
-      <Container className="pt-5 pb-5 mt-3 container-bg mb-3">
+      <Container className="pt-5 pb-5 page-margin container-bg mb-3 page-margin">
         <Row>
           <Col sm={12} lg={{ span: 8, offset: 2 }}>
             <Card className="mb-3">
@@ -50,28 +50,30 @@ const Wishlist = ({ wishlist }) => {
             </Card>
             {wishlist.length !== 0 ? (
               <>
-                <Card>
+                <Card className="pt-3 pb-3">
                   {wishlist.map((element) => {
                     return (
                       <Row className="p-3">
-                        <Col lg={5}>
+                        <Col lg={4} md={4} sm={12}>
                           <div key={element.data.id}>
                             <img
                               variant="top"
                               src={element.data.product_image}
-                              className="heightImage"
+                              className="card-height"
                             />
                           </div>
                         </Col>
-                        <Col lg={{ span: 6 }}>
-                          <h4 className="heading-font mobile-center">
+                        <Col lg={4} md={4} >
+                          <h4 className="heading-font mobile-center"> 
                             {element.data.name}
                           </h4>
                           <p className="mobile-center">
                             Price: ₹ {element.data.price}{" "}
                           </p>
+                          </Col>
+                          <Col lg={4} md={4} className="mobile-center">
                           <Button
-                            className="mt-3 blue-btn"
+                            className="blue-btn"
                             onClick={() => {
                               ConfirmBox(element.data);
                             }}

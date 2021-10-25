@@ -1,27 +1,22 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import Footer from "./Footer";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { login } from "../actions";
-import {LoginValidation} from "./Validation";
-import { toast, ToastContainer } from "react-toastify"; 
+import { LoginValidation } from "./Validation";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  const loggedIn = useSelector((state) => state.shop.loggedIn);
 
-  const loggedIn = useSelector(state => state.shop.loggedIn)
-  console.log("loggedIn", loggedIn);
-   
   useEffect(() => {
-
-      if(loggedIn)
-      {
-        history.push("/");
-        localStorage.setItem("loggedIn", loggedIn);
-      }
-   
-  }, [loggedIn])
+    if (loggedIn) {
+      history.push("/");
+      localStorage.setItem("loggedIn", loggedIn);
+    }
+  }, [loggedIn]);
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -35,82 +30,25 @@ const Login = () => {
 
   const LoginHandler = (e) => {
     e.preventDefault();
-    
+
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
-
-// useEffect(() => {
-//     setErrors(LoginValidation(credentials))
-// }, [credentials])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(LoginValidation(credentials));
     setdataIsCorrect(true);
-
-          console.log(credentials);
-          dispatch(login(credentials)).then(res => {
-                    if (loggedIn) {
-                        history.push("/");
-                    }
-                    else if(!loggedIn)
-                    {
-                       toast.error("Invalid Credentials!", {
-                           position: "top-right",
-                           theme: "colored",
-                       });
-                    }
-                  });
-      
-
-
-
-   // console.log("errors", errors, credentials);
-   // console.log("validation",LoginValidation(credentials));
-    // dispatch(login(credentials));
-    // if (Object.keys(errors).length === 0 && dataIsCorrect) {
-    //     console.log("loggedIn", loggedIn.loggedIn);
-    //      dispatch(login(credentials)).then(res => {
-    //         if (loggedIn) {
-    //             history.push("/");
-    //         }
-    //         else if(!loggedIn)
-    //         {
-    //            toast.error("Invalid Credentials!", {
-    //                position: "top-right",
-    //                theme: "colored",
-    //            });
-    //         }
-            
-    //      })
-         
-        //   if(!loggedIn)
-        //   {
-            
-        //   }
-    //}
-    // if (loggedIn.loggedIn === true) {
-    //   history.push("/");
-    // }
-    // console.log("errors", Object.keys(errors).length, Object.keys(errors).length === 0, dataIsCorrect);
+    dispatch(login(credentials)).then((res) => {
+      if (loggedIn) {
+        history.push("/");
+      } else if (!loggedIn) {
+        toast.error("Invalid Credentials!", {
+          position: "top-right",
+          theme: "colored",
+        });
+      }
+    });
   };
-
-//   useEffect(() => {
-//     if (Object.keys(errors).length === 0 && dataIsCorrect === true) {
-//         console.log("loggedIn", loggedIn.loggedIn);
-//          dispatch(login(credentials));
-//           if (loggedIn.loggedIn) {
-//             history.push("/");
-//           }
-//           else {
-//               console.log("check");
-//             toast.error("Invalid Credentials!", {
-//               position: "top-right",
-//               theme: "colored",
-//             });
-//           }
-//     }
-//   }, [errors]);
 
   return (
     <>
@@ -132,8 +70,7 @@ const Login = () => {
                     value={credentials.email}
                     onChange={LoginHandler}
                   />
-                {errors.email && <p className="error">{errors.email}</p>}
-
+                  {errors.email && <p className="error">{errors.email}</p>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -148,8 +85,9 @@ const Login = () => {
                     value={credentials.password}
                     onChange={LoginHandler}
                   />
-                {errors.password && <p className="error">{errors.password}</p>}
-
+                  {errors.password && (
+                    <p className="error">{errors.password}</p>
+                  )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                   <Form.Check
@@ -174,7 +112,7 @@ const Login = () => {
         </Row>
       </Container>
       <Footer />
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

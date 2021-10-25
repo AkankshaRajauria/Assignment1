@@ -6,23 +6,22 @@ import {
   increment,
   removeFromCart,
   getProducts,
+  getCartItems,
 } from "../actions/index";
 import Header from "./Header";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ApiData from "./Api/ApiData";
 import { SkeletonTheme } from "react-loading-skeleton";
 import CartSkeleton from "./Skeleton/CartSkeleton";
 import Footer from "./Footer";
 import Swal from "sweetalert2";
 
-const Cart = ({ cart, product, pagfilter, isLoading }) => {
+const Cart = ({ cart, pagfilter, isLoading }) => {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.shop.cart);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [input, setInput] = useState(product.quantity);
   const [cartItems, setCartItems] = useState(cart);
   const [isloading, setIsloading] = useState([]);
 
@@ -32,12 +31,7 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
 
   useEffect(() => {
     dispatch(getProducts(pagfilter));
-    ApiData.get("/Cart").then((res) => {
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: res.data,
-      });
-    });
+    dispatch(getCartItems());
   }, [dispatch]);
 
   useEffect(() => {
@@ -79,13 +73,13 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
     <>
       <Header count={cartItems.length} />
       <SkeletonTheme>
-        {isLoading ? (
+        {isloading ? (
           <CartSkeleton />
         ) : (
           <>
-            <Container className="mt-5 pt-5 pb-5 mb-5 container-bg">
+            <Container className="pt-5 pb-5 mb-5 container-bg page-margin">
               <Row>
-                <Col sm={8}>
+                <Col lg={8} md={12}>
                   <Card className="mb-3">
                     <h4 className="text-center p-2 heading-font">
                       My Cart ({totalItems})
@@ -97,21 +91,21 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                         {list.map((element) => {
                           return (
                             <Row className="p-3">
-                              <Col>
-                                <Card key={element.id}>
+                              <Col lg={4} md={4} sm={12}>
+                                <div key={element.id}>
                                   <Card.Img
                                     variant="top"
                                     src={element.product_image}
                                     className="card-height"
                                   />
-                                </Card>
+                                </div>
                               </Col>
-                              <Col>
+                              <Col lg={4} md={4} sm={6}>
                                 <h4 className="heading-font">{element.name}</h4>
                                 <p>Price: ₹ {element.price} </p>
                               </Col>
 
-                              <Col>
+                              <Col lg={4} md={4} sm={6}>
                                 <div className="d-flex">
                                   <Button
                                     disabled={
@@ -142,8 +136,6 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                                 </div>
 
                                 <Button
-                                  // variant="danger"
-
                                   className="mt-3 blue-btn"
                                   onClick={() => {
                                     ConfirmBox(element.id);
@@ -173,7 +165,7 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                     )}
                   </Card>
                 </Col>
-                <Col sm={4}>
+                <Col lg={4} md={12}>
                   <Card>
                     <h4 className="text-center p-2 heading-font">
                       Price Detail
@@ -189,8 +181,8 @@ const Cart = ({ cart, product, pagfilter, isLoading }) => {
                       );
                     })}
                     <Card.Body className="d-flex justify-content-between">
-                      <h5>Total Amount : </h5>
-                      <h5>₹ {totalPrice}</h5>
+                      <h6>Total Amount : </h6>
+                      <h6>₹ {totalPrice}</h6>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -210,7 +202,7 @@ const mapStateToProp = (state) => {
     cart: state.shop.cart,
     product: state.shop.products,
     pagfilter: state.shop.pagfilter,
-    isLoading: state.shop.saved,
+    isLoading: state.shop.cartLoading,
   };
 };
 

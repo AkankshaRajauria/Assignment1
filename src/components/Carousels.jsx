@@ -13,8 +13,7 @@ function Carousels() {
       <Carousel
         activeIndex={index}
         onSelect={handleSelect}
-        className="p-1 bannerclass"
-        style={{ backgroundColor: "#c2c2c2" }}
+        className="p-style bannerclass bg-purple margin-style"
       >
         <Carousel.Item className="bannerclass">
           <img
