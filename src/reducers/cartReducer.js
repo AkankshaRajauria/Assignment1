@@ -58,7 +58,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
     case "ADD_TO_WISHLIST":
       const { data } = action.payload;
-      console.log("wishlist data", data.style)
       const red = "red";
       data.style = red;
       return {
@@ -176,7 +175,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
        ...state,
        wishlist: state.wishlist.filter((element) => {
-         console.log("element.id", element, action.payload);
          return element.data.id !== action.payload.id;
        }),
       }

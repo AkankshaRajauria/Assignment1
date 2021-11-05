@@ -45,7 +45,7 @@ const Wishlist = ({ wishlist }) => {
           <Col sm={12} lg={{ span: 8, offset: 2 }}>
             <Card className="mb-3">
               <h2 className="text-center p-2 heading-font">
-                My WishList ({totalItems})
+                My Wishlist ({totalItems})
               </h2>
             </Card>
             {wishlist.length !== 0 ? (
@@ -53,13 +53,14 @@ const Wishlist = ({ wishlist }) => {
                 <Card className="pt-3 pb-3">
                   {wishlist.map((element) => {
                     return (
-                      <Row className="p-3">
+                      <div className="p-3 row" key={element.id}>
                         <Col lg={4} md={4} sm={12}>
-                          <div key={element.data.id}>
+                          <div>
                             <img
                               variant="top"
                               src={element.data.product_image}
                               className="card-height"
+                              alt="wishlist-img"
                             />
                           </div>
                         </Col>
@@ -67,9 +68,9 @@ const Wishlist = ({ wishlist }) => {
                           <h4 className="heading-font mobile-center"> 
                             {element.data.name}
                           </h4>
-                          <p className="mobile-center">
+                          <div className="mobile-center">
                             Price: ₹ {element.data.price}{" "}
-                          </p>
+                          </div>
                           </Col>
                           <Col lg={4} md={4} className="mobile-center">
                           <Button
@@ -81,7 +82,7 @@ const Wishlist = ({ wishlist }) => {
                           Delete
                           </Button>
                         </Col>
-                      </Row>
+                      </div>
                     );
                   })}
                 </Card>
@@ -94,6 +95,7 @@ const Wishlist = ({ wishlist }) => {
                     <img
                       src="../images/wishlist.png"
                       className="no-wishlist"
+                      alt="no-wishlist-img"
                     />
                   </div>
                 </Card>

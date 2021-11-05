@@ -30,11 +30,6 @@ export const Items = ({
   const [wishStyle, setWishStyle] = useState("grey");
   const [filterCat, setFilterCat] = useState([]);
 
-  // const wishlisted = (e) => {
-  //   e.style = { color: "red" };
-  //   setWishStyle("red");
-  // };
-
 
   useEffect(() => {
     setResult(cardData);
@@ -49,13 +44,13 @@ export const Items = ({
 
   const notify = () => {
     toast.success("Item Added to the Cart", {
-      position: "top-center",
+      position: "top-right",
       theme: "colored",
     });
   };
   const notifyWishlist = () => {
     toast.success("Item Added to the Wishlist", {
-      position: "top-center",
+      position: "top-right",
       theme: "colored",
     });
   };

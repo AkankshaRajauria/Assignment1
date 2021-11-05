@@ -28,7 +28,6 @@ const SignUp = () => {
     e.preventDefault();
     setErrors(Validation(credentials));
     setdataIsCorrect(true);
-    console.log("length",Object.keys(errors).length);
 
   };
 

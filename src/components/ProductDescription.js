@@ -24,7 +24,7 @@ const ProductDescription = (props) => {
   return (
     <>
       <Header />
-      <Container className="pt-5 pb-5 mt-3 container-bg mb-3">
+      <Container className="pt-5 pb-5 container-bg mb-3 page-margin">
         <Row>
           <Col lg={{ span: 8, offset: 2 }} sm={12}>
             <Card className="mb-3">
@@ -33,7 +33,7 @@ const ProductDescription = (props) => {
             <Card className="card-4 text-center" key={cardData.id}>
               <Card.Img
                 variant="top"
-                className="heightClass image-size"
+                className="image-size"
                 src={cardData.product_image}
               />
               <Card.Body>

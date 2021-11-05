@@ -15,7 +15,7 @@ import "../App.css";
 import { logout, search } from "../actions/index";
 
 const Header = ({ cart, pagfilter , loggedIn}) => {
-  console.log("loggedIn Out", loggedIn);
+  
   const [input, setInput] = useState("");
 
   const searchFunc = (e) => {
@@ -25,8 +25,6 @@ const Header = ({ cart, pagfilter , loggedIn}) => {
   const loggedOut = () => {
     localStorage.removeItem("loggedIn")
     dispatch(logout());
-
-    // e.preventDefault();
   }
 
   useEffect(() => {

@@ -86,13 +86,15 @@ const Cart = ({ cart, pagfilter, isLoading }) => {
                     </h4>
                   </Card>
                   <Card className="mb-3">
+                  <Row className="p-3 place-center">
+
                     {list.length !== 0 ? (
                       <>
                         {list.map((element) => {
                           return (
-                            <Row className="p-3">
+                            <div className="row p-3 place-center" key={element.id}>
                               <Col lg={4} md={4} sm={12}>
-                                <div key={element.id}>
+                                <div>
                                   <Card.Img
                                     variant="top"
                                     src={element.product_image}
@@ -106,7 +108,7 @@ const Cart = ({ cart, pagfilter, isLoading }) => {
                               </Col>
 
                               <Col lg={4} md={4} sm={6}>
-                                <div className="d-flex">
+                                <div className="d-flex center-flex">
                                   <Button
                                     disabled={
                                       element.quantity > 1 ? "" : "disabled"
@@ -144,7 +146,7 @@ const Cart = ({ cart, pagfilter, isLoading }) => {
                                   Delete
                                 </Button>
                               </Col>
-                            </Row>
+                            </div>
                           );
                         })}
                       </>
@@ -158,11 +160,13 @@ const Cart = ({ cart, pagfilter, isLoading }) => {
                             <img
                               src="../images/cart-empty.jpg"
                               className="cart-img"
+                              alt="cart-img"
                             />
                           </div>
                         </Card>
                       </>
                     )}
+                    </Row>
                   </Card>
                 </Col>
                 <Col lg={4} md={12}>
@@ -172,11 +176,11 @@ const Cart = ({ cart, pagfilter, isLoading }) => {
                     </h4>
                     {list.map((element) => {
                       return (
-                        <Card.Header className="d-flex justify-content-between">
+                        <Card.Header className="d-flex justify-content-between" key={element.id}>
                           <h6 className="heading-font">
                             {element.name} x {element.quantity}
                           </h6>
-                          <p>₹ {element.price * element.quantity}</p>
+                          <div>₹ {element.price * element.quantity}</div>
                         </Card.Header>
                       );
                     })}

@@ -91,7 +91,7 @@ const Order = (pagfilter) => {
                           <Accordion.Body>
                             <Row>
                               <Col lg={4} className="text-center">
-                                <img src={elem.image} className="order-img" />
+                                <img src={elem.image} className="order-img" alt="orders-img" />
                               </Col>
                               <Col lg={8} className="center-align">
                                 <div>
@@ -119,7 +119,7 @@ const Order = (pagfilter) => {
               <>
                 <Card className="pt-5 pb-5 text-center">
                   <div>
-                    <img src="../images/no_order.png" className="no-order" />
+                    <img src="../images/no_order.png" className="no-order" alt="no-order" />
                   </div>
                 </Card>
               </>

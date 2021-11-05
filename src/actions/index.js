@@ -114,7 +114,7 @@ export const login = (data) => async dispatch =>  {
         data: data
     })  
 } 
-export const logout = (data) => {
+export const logout = () => {
     
     return {
         type:"LOGOUT",
